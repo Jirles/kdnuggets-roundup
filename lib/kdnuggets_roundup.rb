@@ -80,6 +80,7 @@ module KdnuggetsRoundup
       articles = KdnuggetsRoundup::Article.all
       avail_choices = calc_available_choices(articles)
       KdnuggetsRoundup::Article.list(articles)
+      binding.pry 
       input = nil
       while input != 'menu'
         breakline_title
