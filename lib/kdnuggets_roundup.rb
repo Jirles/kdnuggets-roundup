@@ -154,7 +154,7 @@ module KdnuggetsRoundup
         end
       end
       breakline_title
-      puts "Time to be hittin' that ol' dusty trail..."
+      puts "Time to be hittin' th' ol' dusty trail..."
     end
 
   end

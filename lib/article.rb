@@ -40,7 +40,7 @@ class KdnuggetsRoundup::Article
     puts <<-DOC
     #{title}
     By: #{author}
-    Tags:#{tags.each{|t| t == tags[-1] ? print t : print ' ' + t + ','}}
+    Tags: #{tags.dup.join(', ')}
 
     Summary
     -------
