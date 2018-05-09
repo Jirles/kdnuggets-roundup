@@ -43,7 +43,7 @@ class KdnuggetsRoundup::DataWrassler
         break
       end
     end
-    text = text.delete_if{|x| x ==''}
+    excerpt = excerpt.delete_if{|x| x ==''}
     {author: author, tags: tags, summary: summary, excerpt: excerpt}
   end
 end

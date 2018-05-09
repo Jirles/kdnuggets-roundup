@@ -154,6 +154,7 @@ module KdnuggetsRoundup
           chosen_article.read_excerpt
         when 'www'
           puts "Hold on to yer britches, we're headed to the World Wide Web!"
+          system("open " + chosen_article.url)
         when 'again'
           chosen_article.display_article
         when 'other'
