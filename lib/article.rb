@@ -1,12 +1,13 @@
 class KdnuggetsRoundup::Article
 
-  attr_accessor :title, :author, :tags, :url, :summary, :excerpt 
+  attr_accessor :title, :author, :tags, :url, :summary, :excerpt
   @@all = []
   @@popular = [] #=> contains most popular articles for easy filtering
   @@shared = [] #=> contains most shared articles for same reason
 
-  def initialize(title)
+  def initialize(title, url)
     @title = title
+    @url = url 
     @@all << self
   end
 
