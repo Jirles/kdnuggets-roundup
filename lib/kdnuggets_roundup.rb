@@ -63,7 +63,14 @@ module KdnuggetsRoundup
     end
 
     def article_submenu
-      "Here are some articles"
+      puts "Here's everything I could 'rassle up. Now, which one catches yer eye?"
+      breakline_space_only
+      articles = KdnuggetsRoundup::Article.all
+      KdnuggetsRoundup::Article.list(articles)
+      input = nil
+      while input != 'menu'
+        breakline_title
+        puts "Choose a number and I'll show ya more."
     end
 
     def display_main_menu
