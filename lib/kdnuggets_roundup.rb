@@ -71,16 +71,34 @@ module KdnuggetsRoundup
       while input != 'menu'
         breakline_title
         puts "Choose a number and I'll show ya more."
+        puts "Ya can also type 'list' to see the articles listed again or 'menu' to return to the main menu."
+        input = gets.chomp.downcase
+        if input == "popular" #=> to be fixed so it knows if a number in the correct range was chosen
+          breakline_space_only
+          KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.popular)
+          breakline_space_only
+        elsif input == "list"
+          breakline_space_only
+          KdnuggetsRoundup::Article.list(articles)
+        elsif input == 'menu'
+          breakline_end
+          break
+        else
+          breakline_space_only
+          puts "Sorry, partner. Didn't catch that."
+          breakline_space_only
+        end
+      end
     end
 
     def display_main_menu
       puts "What can I lasso up for ya?"
       breakline_space_only
       puts "Choose:"
-      puts "'l' to list all of the top articles for this past week,"
-      puts "'f' to filter articles by most popular or most shared,"
-      puts "'a' to look more closely at a particular article, or"
-      puts "'q' to quit."
+      puts "'list' to list all of the top articles for this past week,"
+      puts "'filter' to filter articles by most popular or most shared,"
+      puts "'article' to look more closely at a particular article, or"
+      puts "'quit' to exit the program."
       puts ' \\\___________'
       puts " |    _______   ----------------[BANG]------------------- =>"
       puts " / { }"
@@ -89,30 +107,33 @@ module KdnuggetsRoundup
 
     def menu
       input = nil
-      while input != 'q'
+      while input != 'quit'
         display_main_menu
         input = gets.chomp.downcase
         case input
-        when "l"
+        when "list"
           article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! Python tips ;)")
           article2 = KdnuggetsRoundup::Article.new("What the hell is a tensor?")
           article3 = KdnuggetsRoundup::Article.new("Big Data? I hardly knew her!")
           breakline_title
           KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.all)
           breakline_end
-        when "f"
+        when "filter"
           breakline_space_only
           puts "Pick your poison, friend: Most Popular or Most Shared?"
           popular_shared_submenu
-        when "a"
+        when "article"
           breakline_space_only
           article_submenu
-        when 'q'
+        when 'quit'
           break
         else
+          breakline_space_only
           puts "Sorry, partner. Didn't catch that."
+          breakline_end
         end
       end
+      breakline_title
       puts "Time to be hittin' that ol' dusty trail..."
     end
 
