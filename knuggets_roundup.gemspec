@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jirles"]
   spec.email         = ["emily.jirles@gmail.com"]
 
-  spec.summary       = %q{Get the most popular and most shared articles in data science from KDnuggets.com}
+  spec.summary       = %q{Get the this week's top data science articles from KDnuggets.com. Yee haw!}
   spec.homepage      = "https://github.com/Jirles/kdnuggets-roundup"
   spec.license       = "MIT"
 
@@ -33,4 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency 'pry', '~> 0.11.3'
+  spec.add_development_dependency 'nokogiri', '~> 1.8', '>= 1.8.2'
 end

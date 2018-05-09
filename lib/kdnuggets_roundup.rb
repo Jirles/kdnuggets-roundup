@@ -1,4 +1,5 @@
 require "kdnuggets_roundup/version"
+require "datawrassler"
 require "article"
 require 'pry'
 
