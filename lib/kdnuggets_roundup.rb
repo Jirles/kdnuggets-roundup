@@ -1,5 +1,6 @@
 require "kdnuggets_roundup/version"
 require "article"
+require 'pry'
 
 module KdnuggetsRoundup
 
