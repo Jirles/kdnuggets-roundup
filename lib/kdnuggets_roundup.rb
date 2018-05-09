@@ -62,10 +62,22 @@ module KdnuggetsRoundup
       end
     end
 
+    def calc_available_choices(articles)
+      Array.new.tap do |avail_choices|
+        (1..articles.count).each do |num|
+          avail_choices << num.to_s
+        end
+      end
+    end
+
     def article_submenu
+      article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! and other Python tips.")
+      article2 = KdnuggetsRoundup::Article.new("What the hell is a tensor?")
+      article3 = KdnuggetsRoundup::Article.new("Big Data? I hardly knew her!") # => create articles so they populate with #list
       puts "Here's everything I could 'rassle up. Now, which one catches yer eye?"
       breakline_space_only
       articles = KdnuggetsRoundup::Article.all
+      avail_choices = calc_available_choices(articles)
       KdnuggetsRoundup::Article.list(articles)
       input = nil
       while input != 'menu'
@@ -112,7 +124,7 @@ module KdnuggetsRoundup
         input = gets.chomp.downcase
         case input
         when "list"
-          article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! Python tips ;)")
+          article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! and other Python tips.")
           article2 = KdnuggetsRoundup::Article.new("What the hell is a tensor?")
           article3 = KdnuggetsRoundup::Article.new("Big Data? I hardly knew her!")
           breakline_title
