@@ -1,6 +1,6 @@
 class KdnuggetsRoundup::Article
 
-  attr_accessor :title, :author, :tags, :url, :summary, :sample
+  attr_accessor :title, :author, :tags, :url, :summary, :excerpt 
   @@all = []
   @@popular = [] #=> contains most popular articles for easy filtering
   @@shared = [] #=> contains most shared articles for same reason
@@ -46,7 +46,10 @@ class KdnuggetsRoundup::Article
     -------
     #{summary}
     DOC
+  end
 
+  def read_excerpt
+    puts "Howdy! I'm Annie Oakley and today we're going to be talking about Python."
   end
 
 end

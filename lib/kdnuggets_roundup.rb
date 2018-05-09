@@ -32,7 +32,7 @@ module KdnuggetsRoundup
     end
 
 
-    def popular_shared_submenu
+    def filter_submenu
       input = nil
       article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! Python tips ;)")
       article2 = KdnuggetsRoundup::Article.new("What the hell is a tensor?")
@@ -94,8 +94,10 @@ module KdnuggetsRoundup
           breakline_space_only
           puts "Here's that article you asked for: "
           breakline_space_only
-          articles[input.to_i - 1].display_article #=> input converted to index
-          #article_view_submenu
+          chosen_article = articles[input.to_i - 1]
+          chosen_article.display_article #=> input converted to index
+          article_view_submenu(chosen_article)
+
           breakline_space_only
         elsif input == "list"
           breakline_space_only
@@ -109,6 +111,35 @@ module KdnuggetsRoundup
           breakline_space_only
         end
       end
+    end
+
+    def article_view_submenu(chosen_article)
+      input = nil
+      while input != 'other'
+        breakline_title
+        puts "Like what you see?"
+        breakline_space_only
+        puts "Choose:"
+        puts "'ex' to read a excerpt of the original article,"
+        puts "'www' to navigate to the original article in your browser,"
+        puts "'again' to read the article summary again, or"
+        puts "'other' to return to look at other articles."
+        input = gets.chomp.downcase
+        case input
+        when 'ex'
+          chosen_article.read_excerpt
+        when 'www'
+          puts "Hold on to your britches, we headed to the World Wide Web!"
+        when 'again'
+          chosen_article.display_article
+        when 'other'
+          breakline_end
+          break
+        else
+          breakline_space_only
+          puts "Sorry, partner. Didn't catch that."
+        end
+      end   
     end
 
     def display_main_menu
@@ -141,7 +172,7 @@ module KdnuggetsRoundup
         when "filter"
           breakline_space_only
           puts "Pick your poison, friend: Most Popular or Most Shared?"
-          popular_shared_submenu
+          filter_submenu
         when "article"
           breakline_space_only
           article_submenu
