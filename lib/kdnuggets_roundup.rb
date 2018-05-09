@@ -14,8 +14,8 @@ module KdnuggetsRoundup
     end
 
     def display_main_menu
-      puts "So, what brings you 'round these parts, stranger? Please enter:"
-      puts "'l' to list all of the top articles for this past week"
+      puts "So, what brings you 'round these parts, stranger? Choose:"
+      puts "'l' to list all of the top articles for this past week,"
       puts "'f' to filter articles by most popular or most shared,"
       puts "'a' to look more closely at a particular article, or"
       puts "'q' to quit."
@@ -41,21 +41,29 @@ module KdnuggetsRoundup
     end
 
     def popular_shared_submenu
-      puts "Enter 'popular' to see the most popular, 'shared' to see the most shared, or 'menu' to return to the main menu."
-      input = gets.chomp.downcase
-      case input
-      when "popular"
-        breakline_space_only
-        KdnuggetsRoundup::Article.list_popular
-      when "shared"
-        breakline_space_only
-        KdnuggetsRoundup::Article.list_shared
-      when 'menu'
-        breakline_end
-        break
-      else
-        breakline_space_only
-        puts "Sorry, partner. Didn't catch that."
+      input = nil
+      while input != 'menu'
+        breakline_title
+        puts "Enter 'popular' to see the most popular, 'shared' to see the most shared, or 'menu' to return to the main menu."
+        input = gets.chomp.downcase
+        if input == "popular"
+          breakline_space_only
+          #KdnuggetsRoundup::Article.list_popular
+          puts "popular stuff"
+          breakline_space_only
+        elsif input == "shared"
+          breakline_space_only
+          #KdnuggetsRoundup::Article.list_shared
+          puts "shared a lot"
+          breakline_space_only
+        elsif input == 'menu'
+          breakline_end
+          break
+        else
+          breakline_space_only
+          puts "Sorry, partner. Didn't catch that."
+          breakline_space_only
+        end
       end
     end
 
@@ -69,11 +77,11 @@ module KdnuggetsRoundup
           article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! Python tips ;)")
           article2 = KdnuggetsRoundup::Article.new("What the hell is a tensor?")
           article3 = KdnuggetsRoundup::Article.new("Big Data? I hardly knew her!")
-          puts ". . ."
+          breakline_title
           KdnuggetsRoundup::Article.list_all
         when "f"
+          breakline_space_only
           puts "Pick your poison, friend: Most Popular or Most Shared?"
-          breakline_title
           popular_shared_submenu
         when "a"
           puts "this will lead to a submenu letting you choose an article"
