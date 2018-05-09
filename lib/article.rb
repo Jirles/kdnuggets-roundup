@@ -10,6 +10,14 @@ class KdnuggetsRoundup::Article
     @@all << self
   end
 
+  def self.add_to_popular(instance)
+    @@popular << instance
+  end
+
+  def self.add_to_shared(instance)
+    @@shared << instance
+  end
+
   def self.all
     @@all
   end

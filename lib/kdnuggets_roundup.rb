@@ -12,11 +12,15 @@ module KdnuggetsRoundup
     end
 
     def display_main_menu
-      puts "What are you looking for? Please enter:"
+      puts "What brings you 'round these parts, stranger? Please enter:"
       puts "'l' to list all of the top articles for this past week"
       puts "'f' to filter articles by most popular or most shared,"
       puts "'a' to look more closely at a particular article, or"
       puts "'q' to quit."
+    end
+
+    def popular_shared_submenu
+      "this will be something"
     end
 
     def menu
@@ -32,7 +36,8 @@ module KdnuggetsRoundup
 
           KdnuggetsRoundup::Article.list_all
         when "f"
-          puts "leads to a submenu where user can toggle between most popular or most shared"
+          puts "Pick your poison, friend: Most Popular or Most Shared?"
+          popular_shared_submenu
         when "a"
           puts "this will lead to a submenu letting you choose an article"
         when 'q'
