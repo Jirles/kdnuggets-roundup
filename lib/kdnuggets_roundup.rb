@@ -116,7 +116,7 @@ module KdnuggetsRoundup
         input = gets.chomp.downcase
         if avail_choices.include?(input) #=> to be fixed so it knows if a number in the correct range was chosen
           breakline_space_only
-          puts "Here's that article you asked for: "
+          puts "Here's that article you asked for:"
           breakline_space_only
           chosen_article = articles[input.to_i - 1]
           chosen_article.display_article #=> input converted to index

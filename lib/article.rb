@@ -55,7 +55,7 @@ class KdnuggetsRoundup::Article
   end
 
   def read_excerpt
-    puts "Howdy! I'm Annie Oakley and today we're going to be talking about Python."
+    puts excerpt 
   end
 
 end
