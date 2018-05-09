@@ -80,16 +80,15 @@ module KdnuggetsRoundup
       articles = KdnuggetsRoundup::Article.all
       avail_choices = calc_available_choices(articles)
       KdnuggetsRoundup::Article.list(articles)
-      binding.pry 
       input = nil
       while input != 'menu'
         breakline_title
         puts "Choose a number and I'll show ya more."
         puts "Ya can also type 'list' to see the articles listed again or 'menu' to return to the main menu."
         input = gets.chomp.downcase
-        if input == "popular" #=> to be fixed so it knows if a number in the correct range was chosen
+        if avail_choices.include?(input) #=> to be fixed so it knows if a number in the correct range was chosen
           breakline_space_only
-          KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.popular)
+          puts "Here's that article you asked for: "
           breakline_space_only
         elsif input == "list"
           breakline_space_only
