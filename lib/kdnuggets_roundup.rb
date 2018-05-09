@@ -1,4 +1,5 @@
 require "kdnuggets_roundup/version"
+require "article"
 
 module KdnuggetsRoundup
 
@@ -25,7 +26,11 @@ module KdnuggetsRoundup
         input = gets.chomp.downcase
         case input
         when "l"
-          puts "list all"
+          article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! Python tips ;)")
+          article2 = KdnuggetsRoundup::Article.new("What the hell is a tensor?")
+          article3 = KdnuggetsRoundup::Article.new("Big Data? I hardly knew her!")
+
+          KdnuggetsRoundup::Article.list_all
         when "f"
           puts "leads to a submenu where user can toggle between most popular or most shared"
         when "a"
