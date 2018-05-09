@@ -7,7 +7,7 @@ class KdnuggetsRoundup::Article
 
   def initialize(title, url)
     @title = title
-    @url = url 
+    @url = url
     @@all << self
   end
 
@@ -35,6 +35,7 @@ class KdnuggetsRoundup::Article
     collection.each_with_index do |article, i|
       puts "#{i + 1}. #{article.title}"
     end
+    nil #=> returns nil so as not to return a collection of article objects
   end
 
   def display_article
