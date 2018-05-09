@@ -27,19 +27,48 @@ module KdnuggetsRoundup
       breakline_title
       puts "The Kdnuggets Roundup is your source for the top articles in data science as curated by KDnuggets.com."
       breakline_end
-      #scraper call
+      KdnuggetsRoundup::DataWrassler.new.wrassle_top_titles_urls
       menu
+    end
+
+    def menu
+      input = nil
+      while input != 'quit'
+        display_main_menu
+        input = gets.chomp.downcase
+        breakline_space_only
+        case input
+        when "list"
+          #article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! and other Python tips.")
+        #  article2 = KdnuggetsRoundup::Article.new("What the hell is a tensor?")
+        #  article3 = KdnuggetsRoundup::Article.new("Big Data? I hardly knew her!")
+          KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.all)
+          breakline_title
+        when "filter"
+          puts "Pick your poison, friend: Most Popular or Most Shared?"
+          filter_submenu
+        when "article"
+          article_submenu
+        when 'quit'
+          break
+        else
+          puts "Sorry, partner. Didn't catch that."
+          breakline_title
+        end
+      end
+      puts "Time to be hittin' th' ol' dusty trail..."
+      breakline_end
     end
 
 
     def filter_submenu
       input = nil
-      article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! Python tips ;)")
-      article2 = KdnuggetsRoundup::Article.new("What the hell is a tensor?")
-      article3 = KdnuggetsRoundup::Article.new("Big Data? I hardly knew her!")
-      article1.add_to_popular
-      article2.add_to_popular
-      article3.add_to_shared
+      #article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! Python tips ;)")
+    #  article2 = KdnuggetsRoundup::Article.new("What the hell is a tensor?")
+      #article3 = KdnuggetsRoundup::Article.new("Big Data? I hardly knew her!")
+    #  article1.add_to_popular
+    #  article2.add_to_popular
+    #  article3.add_to_shared
       while input != 'menu'
         breakline_title
         puts "Enter 'popular' to see the most popular, 'shared' to see the most shared, or 'menu' to return to the main menu."
@@ -72,12 +101,12 @@ module KdnuggetsRoundup
     end
 
     def article_submenu
-      article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! and other Python tips")
-      article2 = KdnuggetsRoundup::Article.new("What the hell is a tensor?")
-      article3 = KdnuggetsRoundup::Article.new("Big Data? I hardly knew her!")
-      article1.author = "Annie Oakley"
-      article1.tags = ['Data science', 'Python', 'Gun slingin\'']
-      article1.summary = "Learn some nifty tips on using Python, a popular and powerful programming language"
+      #article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! and other Python tips")
+      #article2 = KdnuggetsRoundup::Article.new("What the hell is a tensor?")
+    #  article3 = KdnuggetsRoundup::Article.new("Big Data? I hardly knew her!")
+    #  article1.author = "Annie Oakley"
+    #  article1.tags = ['Data science', 'Python', 'Gun slingin\'']
+    #  article1.summary = "Learn some nifty tips on using Python, a popular and powerful programming language"
        # => create articles so they populate with #list and #display_article
       puts "Here's everything I could wrassle up. Now, which one catches yer eye?"
       breakline_space_only
@@ -158,34 +187,6 @@ module KdnuggetsRoundup
       puts "/__/"
     end
 
-    def menu
-      input = nil
-      while input != 'quit'
-        display_main_menu
-        input = gets.chomp.downcase
-        breakline_space_only
-        case input
-        when "list"
-          article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! and other Python tips.")
-          article2 = KdnuggetsRoundup::Article.new("What the hell is a tensor?")
-          article3 = KdnuggetsRoundup::Article.new("Big Data? I hardly knew her!")
-          KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.all)
-          breakline_title
-        when "filter"
-          puts "Pick your poison, friend: Most Popular or Most Shared?"
-          filter_submenu
-        when "article"
-          article_submenu
-        when 'quit'
-          break
-        else
-          puts "Sorry, partner. Didn't catch that."
-          breakline_title
-        end
-      end
-      puts "Time to be hittin' th' ol' dusty trail..."
-      breakline_end
-    end
 
   end
 
