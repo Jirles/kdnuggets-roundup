@@ -19,7 +19,23 @@ module KdnuggetsRoundup
     end
 
     def menu
-      display_main_menu
+      input = nil
+      while input != 'q'
+        display_main_menu
+        input = gets.chomp.downcase
+        case input
+        when "l"
+          puts "list all"
+        when "p"
+          puts "these are very popular"
+        when "s"
+          puts "these are shared by everyone"
+        when 'q'
+          break
+        else
+          puts "Invalid request. Please try again."
+        end
+      end
     end
 
   end
