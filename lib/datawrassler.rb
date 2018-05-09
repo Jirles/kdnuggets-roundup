@@ -18,7 +18,7 @@ class KdnuggetsRoundup::DataWrassler
       title = story.css('b').text
       article = KdnuggetsRoundup::Article.new(title, url)
       counter < 8 ? article.add_to_popular : article.add_to_shared
-      wrassle_article_attributes(url)
+      article.assign_attributes(wrassle_article_attributes(url)) 
     end
   end
 
@@ -37,7 +37,7 @@ class KdnuggetsRoundup::DataWrassler
       counter += 1
       break if counter == 5
     end
-    binding.pry
+    {author: author, tags: tags, summary: summary, excerpt: excerpt}
   end
 
 end

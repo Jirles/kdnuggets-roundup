@@ -11,6 +11,10 @@ class KdnuggetsRoundup::Article
     @@all << self
   end
 
+  def assign_attributes(attribute_hash)
+    attribute_hash.each{|k, v| self.send("#{k}=", v)}
+  end
+
   def add_to_popular
     @@popular << self
   end
