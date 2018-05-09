@@ -32,14 +32,7 @@ class KdnuggetsRoundup::DataWrassler
     tags = doc.css('div.tag-data a')
     tags = tags.collect{|tag| tag.text}
     summary = doc.css('p.excerpt').text
-    author = doc.css('div.author-link b a').text
-    if !author                                    #=> author selectors are not consistent for all articles
-      author = doc.css('div p b a').text
-      if !author
-        author = doc.css('div#post- p b').text
-      end
-    end
-    binding.pry 
+    author = doc.css('#post- b').text.match(/\S*\s\S*[[:punct:]]/)[0].gsub(/[0-9[[:punct:]]]/, '')
     article = doc.css('div#post- p')
     counter = 0
     excerpt = []
