@@ -31,11 +31,12 @@ class KdnuggetsRoundup::DataWrassler
     author = doc.css('div.post p b a').text
     article = doc.css('div#post- p')
     counter = 0
-    excerpt = article.collect do |paragraph|
-                paragraph.text
-                counter += 1
-                break if counter == 5
-              end
+    excerpt = []
+    article.each do |paragraph|
+      excerpt << paragraph.text
+      counter += 1
+      break if counter == 5
+    end
     binding.pry
   end
 
