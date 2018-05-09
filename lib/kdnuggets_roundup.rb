@@ -6,23 +6,11 @@ module KdnuggetsRoundup
   class RoundupCLI
     def call
       puts "Howdy, partner!"
-      puts "The Kdnuggets Roundup is your source for the top articles in data science."
+      puts "The Kdnuggets Roundup is your source for the top articles in data science as curated by KDnuggets.com."
       puts "Let's see what we can lasso up this week!"
       puts ""
       #scraper call
       menu
-    end
-
-    def display_main_menu
-      puts "So, what brings you 'round these parts, stranger? Choose:"
-      puts "'l' to list all of the top articles for this past week,"
-      puts "'f' to filter articles by most popular or most shared,"
-      puts "'a' to look more closely at a particular article, or"
-      puts "'q' to quit."
-      puts ' \\\___________'
-      puts " |    _______   ----------------[BANG]------------------- =>"
-      puts " / { }"
-      puts "/__/"
     end
 
     #formatting methods
@@ -71,6 +59,20 @@ module KdnuggetsRoundup
       end
     end
 
+    def display_main_menu
+      puts "So, what brings you 'round these parts, stranger?"
+      breakline_space_only
+      puts "Choose:"
+      puts "'l' to list all of the top articles for this past week,"
+      puts "'f' to filter articles by most popular or most shared,"
+      puts "'a' to look more closely at a particular article, or"
+      puts "'q' to quit."
+      puts ' \\\___________'
+      puts " |    _______   ----------------[BANG]------------------- =>"
+      puts " / { }"
+      puts "/__/"
+    end
+
     def menu
       input = nil
       while input != 'q'
@@ -89,7 +91,8 @@ module KdnuggetsRoundup
           puts "Pick your poison, friend: Most Popular or Most Shared?"
           popular_shared_submenu
         when "a"
-          puts "this will lead to a submenu letting you choose an article"
+          breakline_space_only
+          article_submenu
         when 'q'
           break
         else
