@@ -27,7 +27,7 @@ module KdnuggetsRoundup
       breakline_title
       puts "The Kdnuggets Roundup is your source for the top articles in data science as curated by KDnuggets.com."
       breakline_end
-      KdnuggetsRoundup::DataWrassler.new.wrassle_top_titles_urls
+      KdnuggetsRoundup::DataWrassler.new.wrassle_top_stories
       menu
     end
 
@@ -67,7 +67,7 @@ module KdnuggetsRoundup
       breakline_end
     end
 
-    #submenus methods 
+    #submenus methods
 
     def filter_submenu
       input = nil
