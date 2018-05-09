@@ -72,9 +72,13 @@ module KdnuggetsRoundup
     end
 
     def article_submenu
-      article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! and other Python tips.")
+      article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! and other Python tips")
       article2 = KdnuggetsRoundup::Article.new("What the hell is a tensor?")
-      article3 = KdnuggetsRoundup::Article.new("Big Data? I hardly knew her!") # => create articles so they populate with #list
+      article3 = KdnuggetsRoundup::Article.new("Big Data? I hardly knew her!")
+      article1.author = "Annie Oakley"
+      article1.tags = ['Data science', 'Python', 'Gun slingin\'']
+      article1.summary = "Learn some nifty tips on using Python, a popular and powerful programming language"
+       # => create articles so they populate with #list and #display_article
       puts "Here's everything I could 'rassle up. Now, which one catches yer eye?"
       breakline_space_only
       articles = KdnuggetsRoundup::Article.all
@@ -90,7 +94,7 @@ module KdnuggetsRoundup
           breakline_space_only
           puts "Here's that article you asked for: "
           breakline_space_only
-          KdnuggetsRoundup::Article.display_article(input.to_i - 1) #=> input converted to index 
+          articles[input.to_i - 1].display_article #=> input converted to index
           #article_view_submenu
           breakline_space_only
         elsif input == "list"
@@ -115,8 +119,8 @@ module KdnuggetsRoundup
       puts "'filter' to filter articles by most popular or most shared,"
       puts "'article' to look more closely at a particular article, or"
       puts "'quit' to exit the program."
-      puts ' \\\___________'
-      puts " |    _______   ----------------[BANG]------------------- =>"
+      puts ' \\\__________'
+      puts " |    _______/   ---------------------------------------- =>"
       puts " / { }"
       puts "/__/"
     end
