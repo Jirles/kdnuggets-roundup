@@ -22,10 +22,9 @@ module KdnuggetsRoundup
 
     def call
       breakline_space_only
-      puts "Howdy!"
+      puts "Howdy, stranger!"
       breakline_title
       puts "The Kdnuggets Roundup is your source for the top articles in data science as curated by KDnuggets.com."
-      puts "So, what brings ya 'round these parts, stranger?"
       breakline_end
       #scraper call
       menu
@@ -79,7 +78,7 @@ module KdnuggetsRoundup
       article1.tags = ['Data science', 'Python', 'Gun slingin\'']
       article1.summary = "Learn some nifty tips on using Python, a popular and powerful programming language"
        # => create articles so they populate with #list and #display_article
-      puts "Here's everything I could 'rassle up. Now, which one catches yer eye?"
+      puts "Here's everything I could wrassle up. Now, which one catches yer eye?"
       breakline_space_only
       articles = KdnuggetsRoundup::Article.all
       avail_choices = calc_available_choices(articles)
@@ -87,8 +86,8 @@ module KdnuggetsRoundup
       input = nil
       while input != 'menu'
         breakline_title
-        puts "Choose a number and I'll show ya more."
-        puts "Ya can also type 'list' to see the articles listed again or 'menu' to return to the main menu."
+        puts "Choose an article number and I'll show ya more."
+        puts "You can also type 'list' to see the articles listed again or 'menu' to return to the main menu."
         input = gets.chomp.downcase
         if avail_choices.include?(input) #=> to be fixed so it knows if a number in the correct range was chosen
           breakline_space_only
@@ -96,8 +95,7 @@ module KdnuggetsRoundup
           breakline_space_only
           chosen_article = articles[input.to_i - 1]
           chosen_article.display_article #=> input converted to index
-          article_view_submenu(chosen_article)
-
+          article_view_submenu(chosen_article, articles)
           breakline_space_only
         elsif input == "list"
           breakline_space_only
@@ -113,7 +111,7 @@ module KdnuggetsRoundup
       end
     end
 
-    def article_view_submenu(chosen_article)
+    def article_view_submenu(chosen_article, articles)
       input = nil
       while input != 'other'
         breakline_title
@@ -130,11 +128,13 @@ module KdnuggetsRoundup
         when 'ex'
           chosen_article.read_excerpt
         when 'www'
-          puts "Hold on to your britches, we headed to the World Wide Web!"
+          puts "Hold on to yer britches, we're headed to the World Wide Web!"
         when 'again'
           chosen_article.display_article
         when 'other'
           breakline_end
+          breakline_space_only
+          KdnuggetsRoundup::Article.list(articles) #=> list articles before breaking out of this loop, as article_submenu does not automatically list once in the loop
           break
         else
           breakline_space_only
