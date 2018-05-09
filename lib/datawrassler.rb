@@ -18,21 +18,25 @@ class KdnuggetsRoundup::DataWrassler
       title = story.css('b').text
       article = KdnuggetsRoundup::Article.new(title, url)
       counter < 8 ? article.add_to_popular : article.add_to_shared
-      wrassle_article_attributes(article, url)
-      binding.pry
+      wrassle_article_attributes(url)
     end
   end
 
-  def wrassle_article_attributes(article, article_url)
+  def wrassle_article_attributes(article_url)
     #helper method to be called inside wrassle_top_stories
     doc = Nokogiri::HTML(open(BASE_URL + article_url))
     tags = doc.css('div.tag-data a')
-    Array.new.tap |tags|
-      tags.each do |tag|
-        tags << tag
-      end
-    end
-    excerpt = doc.css('p.excerpt').text
+    tags = tags.collect{|tag| tag.text}
+    summary = doc.css('p.excerpt').text
+    author = doc.css('div.post p b a').text
+    article = doc.css('div#post- p')
+    counter = 0
+    excerpt = article.collect do |paragraph|
+                paragraph.text
+                counter += 1
+                break if counter == 5
+              end
+    binding.pry
   end
 
 end
