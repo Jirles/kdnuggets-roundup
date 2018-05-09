@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["emily.jirles@gmail.com"]
 
   spec.summary       = %q{Get the most popular and most shared articles in data science from KDnuggets.com}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/Jirles/kdnuggets-roundup"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
