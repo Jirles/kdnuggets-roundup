@@ -42,19 +42,23 @@ module KdnuggetsRoundup
 
     def popular_shared_submenu
       input = nil
+      article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! Python tips ;)")
+      article2 = KdnuggetsRoundup::Article.new("What the hell is a tensor?")
+      article3 = KdnuggetsRoundup::Article.new("Big Data? I hardly knew her!")
+      article1.add_to_popular
+      article2.add_to_popular
+      article3.add_to_shared
       while input != 'menu'
         breakline_title
         puts "Enter 'popular' to see the most popular, 'shared' to see the most shared, or 'menu' to return to the main menu."
         input = gets.chomp.downcase
         if input == "popular"
           breakline_space_only
-          #KdnuggetsRoundup::Article.list_popular
-          puts "popular stuff"
+          KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.popular)
           breakline_space_only
         elsif input == "shared"
           breakline_space_only
-          #KdnuggetsRoundup::Article.list_shared
-          puts "shared a lot"
+          KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.shared)
           breakline_space_only
         elsif input == 'menu'
           breakline_end
@@ -78,7 +82,8 @@ module KdnuggetsRoundup
           article2 = KdnuggetsRoundup::Article.new("What the hell is a tensor?")
           article3 = KdnuggetsRoundup::Article.new("Big Data? I hardly knew her!")
           breakline_title
-          KdnuggetsRoundup::Article.list_all
+          KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.all)
+          breakline_end
         when "f"
           breakline_space_only
           puts "Pick your poison, friend: Most Popular or Most Shared?"
@@ -91,7 +96,7 @@ module KdnuggetsRoundup
           puts "Sorry, partner. Didn't catch that."
         end
       end
-      puts ""
+      puts "Time to be hittin' that ol' dusty trail..."
     end
 
   end

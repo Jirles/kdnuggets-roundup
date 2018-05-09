@@ -10,24 +10,30 @@ class KdnuggetsRoundup::Article
     @@all << self
   end
 
-  def self.add_to_popular(instance)
-    @@popular << instance
+  def add_to_popular
+    @@popular << self
   end
 
-  def self.add_to_shared(instance)
-    @@shared << instance
+  def add_to_shared
+    @@shared << self
+  end
+
+  def self.popular
+    @@popular
+  end
+
+  def self.shared
+    @@shared
   end
 
   def self.all
     @@all
   end
 
-  def self.list_all
-    puts '' #=> ensures space between entry and titles
-    all.each_with_index do |article, i|
+  def self.list(collection)
+    collection.each_with_index do |article, i|
       puts "#{i + 1}. #{article.title}"
     end
-    puts "* * * * * * * * *"
   end
 
 end
