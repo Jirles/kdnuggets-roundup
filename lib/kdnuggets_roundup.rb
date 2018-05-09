@@ -143,7 +143,7 @@ module KdnuggetsRoundup
         puts "Like what you see?"
         breakline_space_only
         puts "Choose:"
-        puts "'ex' to read a excerpt of the original article,"
+        puts "'ex' to read a random excerpt of the original article,"
         puts "'www' to navigate to the original article in your browser,"
         puts "'again' to read the article summary again, or"
         puts "'other' to return to look at other articles."

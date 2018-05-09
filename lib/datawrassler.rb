@@ -32,14 +32,23 @@ class KdnuggetsRoundup::DataWrassler
     tags = doc.css('div.tag-data a')
     tags = tags.collect{|tag| tag.text}
     summary = doc.css('p.excerpt').text
-    author = doc.css('div.post p b a').text
+    author = doc.css('div.author-link b a').text
+    if !author                                    #=> author selectors are not consistent for all articles
+      author = doc.css('div p b a').text
+      if !author
+        author = doc.css('div#post- p b').text
+      end
+    end
+    binding.pry 
     article = doc.css('div#post- p')
     counter = 0
     excerpt = []
     article.each do |paragraph|
       excerpt << paragraph.text
       counter += 1
-      break if counter == 5
+      if counter == 5
+        break
+      end
     end
     {author: author, tags: tags, summary: summary, excerpt: excerpt}
   end
