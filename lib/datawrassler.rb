@@ -16,9 +16,13 @@ class KdnuggetsRoundup::DataWrassler
       counter += 1
       url = story.css('a').attribute('href').text
       title = story.css('b').text
-      article = KdnuggetsRoundup::Article.new(title, url)
+      if KdnuggetsRoundup::Article.find_by_title(title)
+        article = KdnuggetsRoundup::Article.find_by_title(title)
+      else
+        article = KdnuggetsRoundup::Article.new(title, url)
+        article.assign_attributes(wrassle_article_attributes(url))
+      end
       counter < 8 ? article.add_to_popular : article.add_to_shared
-      article.assign_attributes(wrassle_article_attributes(url))
     end
   end
 

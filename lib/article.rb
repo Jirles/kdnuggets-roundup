@@ -15,6 +15,10 @@ class KdnuggetsRoundup::Article
     attribute_hash.each{|k, v| self.send("#{k}=", v)}
   end
 
+  def self.find_by_title(title)
+    all.detect{|story| story.title == title}
+  end
+
   def add_to_popular
     @@popular << self
   end
@@ -55,7 +59,7 @@ class KdnuggetsRoundup::Article
   end
 
   def read_excerpt
-    puts excerpt 
+    puts excerpt
   end
 
 end
