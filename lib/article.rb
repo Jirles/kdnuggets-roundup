@@ -59,7 +59,9 @@ class KdnuggetsRoundup::Article
   end
 
   def read_excerpt
-    puts excerpt
+    excerpt.each do |paragraph|
+      puts paragraph
+    end
   end
 
 end

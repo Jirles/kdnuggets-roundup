@@ -33,17 +33,19 @@ class KdnuggetsRoundup::DataWrassler
     tags = tags.collect{|tag| tag.text}
     summary = doc.css('p.excerpt').text
     author = doc.css('#post- b').text.match(/\S*\s\S*[[:punct:]]/)[0].gsub(/[0-9[[:punct:]]]/, '')
-    text = doc.css('div#post- p')
-    counter = 0
-    excerpt = []
-    text.each do |paragraph|
-      excerpt << paragraph.text
-      counter += 1
-      if counter > 5
-        break
-      end
+    paragraphs = doc.css('div#post- p')
+    #counter = 0
+    text = []
+    paragraphs.each do |paragraph|
+      text << paragraph.text
+    #  counter += 1
+    #  if counter > 5
+    #    break
+    #  end
     end
-    {author: author, tags: tags, summary: summary, excerpt: excerpt}
+    text = text.delete_if{|x| x ==''}
+    binding.pry
+    {author: author, tags: tags, summary: summary, text: text}
   end
 
 end
