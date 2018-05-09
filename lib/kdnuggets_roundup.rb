@@ -7,20 +7,27 @@ module KdnuggetsRoundup
     def call
       puts "Howdy, partner!"
       puts "The Kdnuggets Roundup is your source for the top articles in data science."
-      puts "Let's see what's hot this week!"
+      puts "Let's see what we can lasso up this week!"
+      puts ""
+      #scraper call
       menu
     end
 
     def display_main_menu
-      puts "What brings you 'round these parts, stranger? Please enter:"
+      puts "So, what brings you 'round these parts, stranger? Please enter:"
       puts "'l' to list all of the top articles for this past week"
       puts "'f' to filter articles by most popular or most shared,"
       puts "'a' to look more closely at a particular article, or"
       puts "'q' to quit."
+      puts ' \\\___________'
+      puts " |    _______   ----------------[BANG]------------------- =>"
+      puts " / { }"
+      puts "/__/"
     end
 
     def popular_shared_submenu
-      "this will be something"
+      puts "this will be something"
+      puts "* * * * * * * * *"
     end
 
     def menu
@@ -46,6 +53,7 @@ module KdnuggetsRoundup
           puts "Invalid request. Please try again."
         end
       end
+      puts ""
     end
 
   end
