@@ -10,8 +10,16 @@ module KdnuggetsRoundup
       menu
     end
 
+    def display_main_menu
+      puts "What are you looking for? Please enter:"
+      puts "'l' to list all of the top articles for this past week"
+      puts "'p' to see the most popular articles,"
+      puts "'s' to see the most shared articles, or"
+      puts "'q' to quit."
+    end
+
     def menu
-      puts "this will be the menu"
+      display_main_menu
     end
 
   end
