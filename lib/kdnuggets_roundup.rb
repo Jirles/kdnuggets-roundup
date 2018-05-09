@@ -13,8 +13,8 @@ module KdnuggetsRoundup
     def display_main_menu
       puts "What are you looking for? Please enter:"
       puts "'l' to list all of the top articles for this past week"
-      puts "'p' to see the most popular articles,"
-      puts "'s' to see the most shared articles, or"
+      puts "'f' to filter articles by most popular or most shared,"
+      puts "'a' to look more closely at a particular article, or"
       puts "'q' to quit."
     end
 
@@ -26,10 +26,10 @@ module KdnuggetsRoundup
         case input
         when "l"
           puts "list all"
-        when "p"
-          puts "these are very popular"
-        when "s"
-          puts "these are shared by everyone"
+        when "f"
+          puts "leads to a submenu where user can toggle between most popular or most shared"
+        when "a"
+          puts "this will lead to a submenu letting you choose an article"
         when 'q'
           break
         else
