@@ -36,4 +36,16 @@ class KdnuggetsRoundup::Article
     end
   end
 
+  def display_article
+    puts <<-DOC
+    #{title}
+    By: #{author}
+    Tags:#{tags.each{|t| t == tags[-1] ? t : ' ' + t + ','}}
+    Summary
+    -------
+    #{summary}
+    DOC
+
+  end
+
 end

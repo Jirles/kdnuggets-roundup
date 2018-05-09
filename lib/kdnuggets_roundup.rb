@@ -90,6 +90,9 @@ module KdnuggetsRoundup
           breakline_space_only
           puts "Here's that article you asked for: "
           breakline_space_only
+          KdnuggetsRoundup::Article.display_article(input.to_i - 1) #=> input converted to index 
+          #article_view_submenu
+          breakline_space_only
         elsif input == "list"
           breakline_space_only
           KdnuggetsRoundup::Article.list(articles)
