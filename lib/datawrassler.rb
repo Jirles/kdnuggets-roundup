@@ -14,7 +14,7 @@ class KdnuggetsRoundup::DataWrassler
     counter = 0
     stories.each do |story|
       counter += 1
-      url = story.css('a').attribute('href').text
+      url = BASE_URL + story.css('a').attribute('href').text
       title = story.css('b').text
       if KdnuggetsRoundup::Article.find_by_title(title)
         article = KdnuggetsRoundup::Article.find_by_title(title)
@@ -28,24 +28,22 @@ class KdnuggetsRoundup::DataWrassler
 
   def wrassle_article_attributes(article_url)
     #helper method to be called inside wrassle_top_stories
-    doc = Nokogiri::HTML(open(BASE_URL + article_url))
+    doc = Nokogiri::HTML(open(article_url))
     tags = doc.css('div.tag-data a')
     tags = tags.collect{|tag| tag.text}
     summary = doc.css('p.excerpt').text
     author = doc.css('#post- b').text.match(/\S*\s\S*[[:punct:]]/)[0].gsub(/[0-9[[:punct:]]]/, '')
     paragraphs = doc.css('div#post- p')
-    #counter = 0
-    text = []
+    counter = 0
+    excerpt = []
     paragraphs.each do |paragraph|
-      text << paragraph.text
-    #  counter += 1
-    #  if counter > 5
-    #    break
-    #  end
+      excerpt << paragraph.text
+      counter += 1
+      if counter > 7
+        break
+      end
     end
     text = text.delete_if{|x| x ==''}
-    binding.pry
-    {author: author, tags: tags, summary: summary, text: text}
+    {author: author, tags: tags, summary: summary, excerpt: excerpt}
   end
-
 end
