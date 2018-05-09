@@ -125,6 +125,7 @@ module KdnuggetsRoundup
         puts "'again' to read the article summary again, or"
         puts "'other' to return to look at other articles."
         input = gets.chomp.downcase
+        breakline_space_only
         case input
         when 'ex'
           chosen_article.read_excerpt
@@ -139,7 +140,7 @@ module KdnuggetsRoundup
           breakline_space_only
           puts "Sorry, partner. Didn't catch that."
         end
-      end   
+      end
     end
 
     def display_main_menu
@@ -161,31 +162,28 @@ module KdnuggetsRoundup
       while input != 'quit'
         display_main_menu
         input = gets.chomp.downcase
+        breakline_space_only
         case input
         when "list"
           article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! and other Python tips.")
           article2 = KdnuggetsRoundup::Article.new("What the hell is a tensor?")
           article3 = KdnuggetsRoundup::Article.new("Big Data? I hardly knew her!")
-          breakline_title
           KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.all)
-          breakline_end
+          breakline_title
         when "filter"
-          breakline_space_only
           puts "Pick your poison, friend: Most Popular or Most Shared?"
           filter_submenu
         when "article"
-          breakline_space_only
           article_submenu
         when 'quit'
           break
         else
-          breakline_space_only
           puts "Sorry, partner. Didn't catch that."
-          breakline_end
+          breakline_title
         end
       end
-      breakline_title
       puts "Time to be hittin' th' ol' dusty trail..."
+      breakline_end
     end
 
   end
