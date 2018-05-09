@@ -25,9 +25,38 @@ module KdnuggetsRoundup
       puts "/__/"
     end
 
-    def popular_shared_submenu
-      puts "this will be something"
+    #formatting methods
+    def breakline_space_only
+      puts ""
+    end
+
+    def breakline_title
+      puts ". . ."
+      puts ""
+    end
+
+    def breakline_end
       puts "* * * * * * * * *"
+      puts ""
+    end
+
+    def popular_shared_submenu
+      puts "Enter 'popular' to see the most popular, 'shared' to see the most shared, or 'menu' to return to the main menu."
+      input = gets.chomp.downcase
+      case input
+      when "popular"
+        breakline_space_only
+        KdnuggetsRoundup::Article.list_popular
+      when "shared"
+        breakline_space_only
+        KdnuggetsRoundup::Article.list_shared
+      when 'menu'
+        breakline_end
+        break
+      else
+        breakline_space_only
+        puts "Sorry, partner. Didn't catch that."
+      end
     end
 
     def menu
@@ -40,17 +69,18 @@ module KdnuggetsRoundup
           article1 = KdnuggetsRoundup::Article.new("There's a snake in my boot! Python tips ;)")
           article2 = KdnuggetsRoundup::Article.new("What the hell is a tensor?")
           article3 = KdnuggetsRoundup::Article.new("Big Data? I hardly knew her!")
-
+          puts ". . ."
           KdnuggetsRoundup::Article.list_all
         when "f"
           puts "Pick your poison, friend: Most Popular or Most Shared?"
+          breakline_title
           popular_shared_submenu
         when "a"
           puts "this will lead to a submenu letting you choose an article"
         when 'q'
           break
         else
-          puts "Invalid request. Please try again."
+          puts "Sorry, partner. Didn't catch that."
         end
       end
       puts ""
