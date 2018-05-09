@@ -4,15 +4,6 @@ require "article"
 module KdnuggetsRoundup
 
   class RoundupCLI
-    def call
-      puts "Howdy, partner!"
-      puts "The Kdnuggets Roundup is your source for the top articles in data science as curated by KDnuggets.com."
-      puts "Let's see what we can lasso up this week!"
-      puts ""
-      #scraper call
-      menu
-    end
-
     #formatting methods
     def breakline_space_only
       puts ""
@@ -27,6 +18,18 @@ module KdnuggetsRoundup
       puts "* * * * * * * * *"
       puts ""
     end
+
+    def call
+      breakline_space_only
+      puts "Howdy!"
+      breakline_title
+      puts "The Kdnuggets Roundup is your source for the top articles in data science as curated by KDnuggets.com."
+      puts "So, what brings ya 'round these parts, stranger?"
+      breakline_end
+      #scraper call
+      menu
+    end
+
 
     def popular_shared_submenu
       input = nil
@@ -59,8 +62,12 @@ module KdnuggetsRoundup
       end
     end
 
+    def article_submenu
+      "Here are some articles"
+    end
+
     def display_main_menu
-      puts "So, what brings you 'round these parts, stranger?"
+      puts "What can I lasso up for ya?"
       breakline_space_only
       puts "Choose:"
       puts "'l' to list all of the top articles for this past week,"
