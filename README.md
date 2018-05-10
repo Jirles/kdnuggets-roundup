@@ -4,7 +4,7 @@ Kdnuggets Roundup is a command-line interface gem that delivers [Kdnuggets'] (ht
 
 Kdnuggets is a leading website in Data Science, Business Analytics, Big Data, Data Mining, and Machine Learning. It's [award-winning coverage](https://www.kdnuggets.com/about/index.html) is viewed by over 500,000 unique monthly visitors, and over 200,000 subscribers.
 
-_(None of those awards, however, are for it's web design - it's got a layout only a data scientist would love <3)_
+_( None of those awards, however, are for it's web design - it's got a layout only a data scientist would love <3. In fact, the CLI may be an improvement ;) )_
 
 ## Installation
 
