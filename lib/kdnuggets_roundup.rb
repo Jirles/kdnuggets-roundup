@@ -69,19 +69,14 @@ module KdnuggetsRoundup
       puts "Pick your poison, friend: Most Popular or Most Shared?"
       puts "Enter 'popular' to see the most popular or 'shared' to see the most shared"
       input = gets.chomp.downcase
+      breakline_space_only
       case input
       when "popular"
-        breakline_space_only
         KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.popular)
-        breakline_space_only
       when "shared"
-        breakline_space_only
         KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.shared)
-        breakline_space_only
       else
-        breakline_space_only
         puts "Sorry, partner. Didn't catch that."
-        breakline_space_only
       end
     end
 
@@ -115,24 +110,21 @@ module KdnuggetsRoundup
           puts "Here's that article you asked for:"
           breakline_space_only
           chosen_article = articles[input.to_i - 1]
-          chosen_article.display_article #=> input converted to index
+          chosen_article.display_article
           article_sub_submenu(chosen_article, articles)
         when "list"
           KdnuggetsRoundup::Article.list(articles)
         when "filter"
           filter_submenu
         when "menu"
-          breakline_end
           break
         else
-          breakline_space_only
           puts "Sorry, partner. Didn't catch that."
-          breakline_space_only
         end
       end
     end
 
-    def article_view_sub_submenu(chosen_article, articles)
+    def article_sub_submenu(chosen_article, articles)
       input = nil
       while input != 'other'
         breakline_title
@@ -154,12 +146,10 @@ module KdnuggetsRoundup
         when 'again'
           chosen_article.display_article
         when 'other'
-          breakline_end
           breakline_space_only
           KdnuggetsRoundup::Article.list(articles) #=> list articles before breaking out of this loop, as article_submenu does not automatically list once in the loop
-          break
+          break #=> breaks out to article_submenu
         else
-          breakline_space_only
           puts "Sorry, partner. Didn't catch that."
         end
       end
