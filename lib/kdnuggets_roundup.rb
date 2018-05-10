@@ -107,18 +107,17 @@ module KdnuggetsRoundup
         puts "'menu' to return to the main menu."
         input = gets.chomp.downcase
         breakline_space_only
-        case input
-        when avail_choices.include?(input)
+        if avail_choices.include?(input)
           puts "Here's that article you asked for:"
           breakline_space_only
           chosen_article = articles[input.to_i - 1]
           chosen_article.display_article
           article_sub_submenu(chosen_article, articles)
-        when "list"
+        elsif input == "list"
           KdnuggetsRoundup::Article.list(articles)
-        when "filter"
+        elsif input == "filter"
           filter_submenu
-        when "menu"
+        elsif input == "menu"
           break
         else
           puts "Sorry, partner. Didn't catch that."
