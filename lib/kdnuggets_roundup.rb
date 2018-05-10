@@ -16,11 +16,6 @@ module KdnuggetsRoundup
       breakline_space_only
     end
 
-    def breakline_end
-      puts "* * * * * * * * *"
-      breakline_space_only
-    end
-
     def call
       breakline_space_only
       puts "Howdy, stranger!"
@@ -60,7 +55,6 @@ module KdnuggetsRoundup
         end
       end
       puts "Time to be hittin' th' ol' dusty trail..."
-      breakline_end
     end
 
     #submenus methods
