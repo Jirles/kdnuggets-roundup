@@ -25,7 +25,7 @@ module KdnuggetsRoundup
       breakline_space_only
       puts "Howdy, stranger!"
       breakline_title
-      puts "The Kdnuggets Roundup is your source for the top articles in data science as curated by KDnuggets.com."
+      puts "The Kdnuggets Roundup is your source for the top articles in data science, as curated by KDnuggets.com."
       puts "Let's see what we can wrassle up for ya..."
       breakline_end
       KdnuggetsRoundup::DataWrassler.new.wrassle_top_stories
@@ -35,6 +35,7 @@ module KdnuggetsRoundup
     def main_menu
       input = nil
       while input != 'quit'
+        breakline_title
         puts "What can I lasso up for ya?"
         breakline_space_only
         puts "Choose:"
@@ -50,17 +51,12 @@ module KdnuggetsRoundup
         case input
         when "list"
           KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.all)
-          breakline_title
-        when "filter"
-          puts "Pick your poison, friend: Most Popular or Most Shared?"
-          filter_submenu
         when "article"
           article_submenu
         when 'quit'
           break
         else
           puts "Sorry, partner. Didn't catch that."
-          breakline_title
         end
       end
       puts "Time to be hittin' th' ol' dusty trail..."
@@ -68,7 +64,6 @@ module KdnuggetsRoundup
     end
 
     #submenus methods
-
     def filter_submenu
       breakline_title
       puts "Pick your poison, friend: Most Popular or Most Shared?"
@@ -90,6 +85,7 @@ module KdnuggetsRoundup
       end
     end
 
+    #helper method for article_submenu
     def calc_available_choices(articles)
       Array.new.tap do |avail_choices|
         (1..articles.count).each do |num|
@@ -113,17 +109,15 @@ module KdnuggetsRoundup
         puts "'filter' to filter articles by most popular or most shared, or"
         puts "'menu' to return to the main menu."
         input = gets.chomp.downcase
+        breakline_space_only
         case input
-        when avail_choices.include?(input) #=> to be fixed so it knows if a number in the correct range was chosen
-          breakline_space_only
+        when avail_choices.include?(input)
           puts "Here's that article you asked for:"
           breakline_space_only
           chosen_article = articles[input.to_i - 1]
           chosen_article.display_article #=> input converted to index
-          article_view_submenu(chosen_article, articles)
-          breakline_space_only
+          article_sub_submenu(chosen_article, articles)
         when "list"
-          breakline_space_only
           KdnuggetsRoundup::Article.list(articles)
         when "filter"
           filter_submenu
@@ -138,14 +132,14 @@ module KdnuggetsRoundup
       end
     end
 
-    def article_view_submenu(chosen_article, articles)
+    def article_view_sub_submenu(chosen_article, articles)
       input = nil
       while input != 'other'
         breakline_title
         puts "Like what you see?"
         breakline_space_only
         puts "Choose:"
-        puts "'ex' to read a random excerpt of the original article,"
+        puts "'ex' to read an excerpt from the original article,"
         puts "'www' to navigate to the original article in your browser,"
         puts "'again' to read the article summary again, or"
         puts "'other' to return to look at other articles."
