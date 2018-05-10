@@ -1,8 +1,10 @@
 # KnuggetsRoundup
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/knuggets_roundup`. To experiment with that code, run `bin/console` for an interactive prompt.
+Kdnuggets Roundup is a command-line interface gem that delivers [Kdnuggets'] (https://www.kdnuggets.com/) top articles directly to your terminal. See the rankings, read excerpts, and, if something catches your eye, open the article in your browser.  
 
-TODO: Delete this and the text above, and describe your gem
+Kdnuggets is a leading website in Data Science, Business Analytics, Big Data, Data Mining, and Machine Learning. It's [award-winning coverage](https://www.kdnuggets.com/about/index.html) is viewed by over 500,000 unique monthly visitors, and over 200,000 subscribers.
+
+_(None of those awards, however, are for it's web design - it's got a layout only a data scientist would love <3)_
 
 ## Installation
 
@@ -22,7 +24,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+After initiating the program you'll be guided by menu prompts throughout the program. Don't worry if you misspell a command! The CLI will prompt you again.
+
+To exit the program you will have to navigate back to the main menu - again, follow the prompts!
 
 ## Development
 
