@@ -16,6 +16,13 @@ module KdnuggetsRoundup
       breakline_space_only
     end
 
+    def gun_graphic
+      puts ' \\\__________'
+      puts " |    ______-/   ---------------------------------------- =>"
+      puts " / { }"
+      puts "/__/"
+    end
+
     def call
       breakline_space_only
       puts "Howdy, stranger!"
@@ -31,28 +38,20 @@ module KdnuggetsRoundup
       articles = KdnuggetsRoundup::Article.all
       while input != 'quit'
         breakline_title
-        puts "What can I lasso up for ya?"
+        puts "Pick yer poison, friend."
         breakline_space_only
         puts "Choose:"
         puts "'rank' to see the articles ranked by most popular and most shared,"
         puts "'article' to look more closely at a particular article, or"
         puts "'quit' to exit the program."
-        puts ' \\\__________'
-        puts " |    ______-/   ---------------------------------------- =>"
-        puts " / { }"
-        puts "/__/"
+        gun_graphic
         input = gets.chomp.downcase
         breakline_space_only
         case input
         when "rank"
-          puts "Most Popular"
-          KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.popular)
-          breakline_space_only
-          puts "Most Shared"
-          KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.shared)
-          breakline_space_only
+          KdnuggetsRoundup::Article.display_rankings
         when "article"
-          article_submenu(articles)
+          article_selection_menu(articles)
         when 'quit'
           break
         else
@@ -74,7 +73,7 @@ module KdnuggetsRoundup
     end
 
     #submenu methods
-    def article_submenu(articles)
+    def article_selection_menu(articles)
       breakline_space_only
       avail_choices = calc_available_choices(articles)
       input = nil
@@ -82,11 +81,12 @@ module KdnuggetsRoundup
         breakline_title
         KdnuggetsRoundup::Article.list(articles)
         breakline_space_only
-        puts "Pick your poison, friend. Enter an article number and I'll show ya more."
+        puts "Enter an article number and I'll lasso it up for ya."
         breakline_space_only
         puts "You can also choose:"
         puts "'rank' to see the articles ranked by most popular and most shared, or "
         puts "'menu' to return to the main menu."
+        gun_graphic
         input = gets.chomp.downcase
         breakline_space_only
         if avail_choices.include?(input)
@@ -94,7 +94,7 @@ module KdnuggetsRoundup
           breakline_space_only
           chosen_article = articles[input.to_i - 1]
           chosen_article.display_article
-          article_sub_submenu(chosen_article, articles)
+          article_selection_submenu(chosen_article, articles)
         elsif input == "rank"
           rank_submenu
         elsif input == "menu"
@@ -109,18 +109,14 @@ module KdnuggetsRoundup
       input = nil
       until input == 'menu'
         breakline_title
-        puts "Most Popular"
-        KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.popular)
-        breakline_space_only
-        puts "Most Shared"
-        KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.shared)
-        breakline_space_only
+        KdnuggetsRoundup::Article.display_rankings
         puts "When you're ready to return to the article menu, type 'menu'."
+        gun_graphic
         input = gets.chomp.downcase
       end
     end
 
-    def article_sub_submenu(chosen_article, articles)
+    def article_selection_submenu(chosen_article, articles)
       input = nil
       while input != 'other'
         breakline_title
@@ -129,7 +125,8 @@ module KdnuggetsRoundup
         puts "Choose:"
         puts "'ex' to read an excerpt from the original article,"
         puts "'www' to navigate to the original article in your browser,"
-        puts "'other' to look at other articles."
+        puts "'menu' to return to the article selection menu."
+        gun_graphic
         input = gets.chomp.downcase
         breakline_space_only
         case input
@@ -138,8 +135,8 @@ module KdnuggetsRoundup
         when 'www'
           puts "Hold on to yer britches, we're headed to the World Wide Web!"
           system("open " + chosen_article.url)
-        when 'other'
-          break #=> breaks out to article_submenu
+        when 'menu'
+          break #=> breaks out to submenu
         else
           puts "Sorry, partner. Didn't catch that."
         end

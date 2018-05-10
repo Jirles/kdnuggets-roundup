@@ -42,7 +42,7 @@ class KdnuggetsRoundup::Article
   def self.list(collection)
     collection.each_with_index do |article, i|
       puts "#{i + 1}. #{article.title}"
-    end 
+    end
   end
 
   def display_article
@@ -55,6 +55,15 @@ class KdnuggetsRoundup::Article
     -------
     #{summary}
     DOC
+  end
+
+  def self.display_rankings
+    puts "Most Popular"
+    list(popular)
+    puts ""
+    puts "Most Shared"
+    list( shared)
+    puts ""
   end
 
   def read_excerpt
