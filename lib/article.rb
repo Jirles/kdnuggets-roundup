@@ -39,18 +39,10 @@ class KdnuggetsRoundup::Article
     @@all
   end
 
-  def self.list
-    puts "Most Popular"
-    puts "------"
-    popular.each_with_index do |article, i|
+  def self.list(collection)
+    collection.each_with_index do |article, i|
       puts "#{i + 1}. #{article.title}"
-    end
-    puts ""
-    puts "Most Shared"
-    puts "------"
-    shared.each_with_index do |article, i|
-      puts "#{i + 8}. #{article.title}"
-    end
+    end 
   end
 
   def display_article
