@@ -44,7 +44,7 @@ module KdnuggetsRoundup
         breakline_space_only
         case input
         when "list"
-          KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.all)
+          KdnuggetsRoundup::Article.list
         when "article"
           article_submenu
         when 'quit'
@@ -65,23 +65,6 @@ module KdnuggetsRoundup
       puts breakline_space_only
     end
 
-    #submenus methods
-    def filter_submenu
-      breakline_title
-      puts "Pick your poison, friend: Most Popular or Most Shared?"
-      puts "Enter 'popular' to see the most popular articles or 'shared' to see the most shared."
-      input = gets.chomp.downcase
-      breakline_space_only
-      case input
-      when "popular"
-        KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.popular)
-      when "shared"
-        KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.shared)
-      else
-        puts "Sorry, partner. Didn't catch that."
-      end
-    end
-
     #helper method for article_submenu
     def calc_available_choices(articles)
       Array.new.tap do |avail_choices|
@@ -91,6 +74,7 @@ module KdnuggetsRoundup
       end
     end
 
+    #submenu methods
     def article_submenu
       puts "Here's everything I could wrassle up. Now, which one catches yer eye?"
       breakline_space_only
@@ -101,10 +85,7 @@ module KdnuggetsRoundup
       while input != 'menu'
         breakline_title
         puts "Choose an article number and I'll show ya more."
-        puts "You can also choose:"
-        puts "'list' to see all the articles listed again,"
-        puts "'filter' to filter articles by most popular or most shared, or"
-        puts "'menu' to return to the main menu."
+        puts "You can also choose 'list' to see all the articles listed again or 'menu' to return to the main menu."
         input = gets.chomp.downcase
         breakline_space_only
         if avail_choices.include?(input)
@@ -115,8 +96,6 @@ module KdnuggetsRoundup
           article_sub_submenu(chosen_article, articles)
         elsif input == "list"
           KdnuggetsRoundup::Article.list(articles)
-        elsif input == "filter"
-          filter_submenu
         elsif input == "menu"
           break
         else
