@@ -28,12 +28,13 @@ module KdnuggetsRoundup
 
     def main_menu
       input = nil
+      articles = KdnuggetsRoundup::Article.all
       while input != 'quit'
         breakline_title
         puts "What can I lasso up for ya?"
         breakline_space_only
         puts "Choose:"
-        puts "'list' to list all of the top articles for this past week,"
+        puts "'rank' to see the articles ranked by most popular and most shared,"
         puts "'article' to look more closely at a particular article, or"
         puts "'quit' to exit the program."
         puts ' \\\__________'
@@ -43,10 +44,15 @@ module KdnuggetsRoundup
         input = gets.chomp.downcase
         breakline_space_only
         case input
-        when "list"
-          KdnuggetsRoundup::Article.list
+        when "rank"
+          puts "Most Popular"
+          KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.popular)
+          breakline_space_only
+          puts "Most Shared"
+          KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.shared)
+          breakline_space_only
         when "article"
-          article_submenu
+          article_submenu(articles)
         when 'quit'
           break
         else
@@ -75,17 +81,17 @@ module KdnuggetsRoundup
     end
 
     #submenu methods
-    def article_submenu
-      puts "Here's everything I could wrassle up. Now, which one catches yer eye?"
+    def article_submenu(articles)
       breakline_space_only
-      articles = KdnuggetsRoundup::Article.all
       avail_choices = calc_available_choices(articles)
-      KdnuggetsRoundup::Article.list(articles)
       input = nil
       while input != 'menu'
         breakline_title
-        puts "Choose an article number and I'll show ya more."
-        puts "You can also choose 'list' to see all the articles listed again or 'menu' to return to the main menu."
+        KdnuggetsRoundup::Article.list(articles)
+        puts "Pick your poison, friend. Enter an article number and I'll show ya more."
+        puts "You can also choose:"
+        puts "'rank' to see the articles ranked by most popular and most shared, or "
+        puts "'menu' to return to the main menu."
         input = gets.chomp.downcase
         breakline_space_only
         if avail_choices.include?(input)
@@ -94,13 +100,28 @@ module KdnuggetsRoundup
           chosen_article = articles[input.to_i - 1]
           chosen_article.display_article
           article_sub_submenu(chosen_article, articles)
-        elsif input == "list"
-          KdnuggetsRoundup::Article.list(articles)
+        elsif input == "rank"
+          rank_submenu
         elsif input == "menu"
           break
         else
           puts "Sorry, partner. Didn't catch that."
         end
+      end
+    end
+
+    def rank_submenu
+      input = nil
+      until input == 'menu'
+        breakline_title
+        puts "Most Popular"
+        KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.popular)
+        breakline_space_only
+        puts "Most Shared"
+        KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.shared)
+        breakline_space_only
+        puts "When you're ready to return to the article menu, type 'menu'."
+        input = gets.chomp.downcase
       end
     end
 
