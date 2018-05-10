@@ -16,13 +16,13 @@ class KdnuggetsRoundup::DataWrassler
       counter += 1
       url = BASE_URL + story.css('a').attribute('href').text
       title = story.css('b').text
-      if KdnuggetsRoundup::Article.find_by_title(title)
+      if KdnuggetsRoundup::Article.find_by_title(title) #=> there are always 14 stories, but there are often duplicates
         article = KdnuggetsRoundup::Article.find_by_title(title)
       else
         article = KdnuggetsRoundup::Article.new(title, url)
         article.assign_attributes(wrassle_article_attributes(url))
       end
-      counter < 8 ? article.add_to_popular : article.add_to_shared
+      counter < 8 ? article.add_to_popular : article.add_to_shared #=> top stories shows the 7 most popular and 7 most shared articles
     end
   end
 
@@ -38,15 +38,14 @@ class KdnuggetsRoundup::DataWrassler
     excerpt = []
     article.each do |paragraph|
       counter += 1
-      if counter < 3 #=> first two elements are normally
+      if counter < 3 #=> first two elements are normally bylines or other fluff
         next
       elsif counter > 8 #=> ensures only 5 elements make it through
         break
       end
       excerpt << paragraph.text
-      #binding.pry
     end
-    excerpt = excerpt.delete_if{|x| x ==''}
+    #excerpt = excerpt.delete_if{|x| x ==''}
     {author: author, tags: tags, summary: summary, excerpt: excerpt}
   end
 end

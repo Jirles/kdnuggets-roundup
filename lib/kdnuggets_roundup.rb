@@ -21,8 +21,7 @@ module KdnuggetsRoundup
       puts "Howdy, stranger!"
       breakline_title
       puts "The Kdnuggets Roundup is your source for the top articles in data science, as curated by KDnuggets.com."
-      puts "Let's see what we can wrassle up for ya..."
-      breakline_end
+      puts "Let's see what we can wrassle up..."
       KdnuggetsRoundup::DataWrassler.new.wrassle_top_stories
       main_menu
     end
@@ -38,7 +37,7 @@ module KdnuggetsRoundup
         puts "'article' to look more closely at a particular article, or"
         puts "'quit' to exit the program."
         puts ' \\\__________'
-        puts " |    _______/   ---------------------------------------- =>"
+        puts " |    ______-/   ---------------------------------------- =>"
         puts " / { }"
         puts "/__/"
         input = gets.chomp.downcase
@@ -56,20 +55,21 @@ module KdnuggetsRoundup
       end
       puts "Time to be hittin' th' ol' dusty trail..."
       puts "                 _______  _____ "
-      puts '                /       \/    \\'
-      puts '               /               \\'
-      puts '              /                 \\'
-      puts '             /                   \\'
-      puts '            /---|------|------|---\\'
-      puts '\_________ /-------|-------|-------\\___________/'
+      puts '                /       \/     \\'
+      puts '               /                \\'
+      puts '              /                  \\'
+      puts '             /                    \\'
+      puts '/           /---|-------|------|---\\            \\'
+      puts '\_________ /-------|--------|-------\\___________/'
       puts ' \_____________________________________________/'
+      puts breakline_space_only
     end
 
     #submenus methods
     def filter_submenu
       breakline_title
       puts "Pick your poison, friend: Most Popular or Most Shared?"
-      puts "Enter 'popular' to see the most popular or 'shared' to see the most shared"
+      puts "Enter 'popular' to see the most popular articles or 'shared' to see the most shared."
       input = gets.chomp.downcase
       breakline_space_only
       case input
@@ -135,8 +135,8 @@ module KdnuggetsRoundup
         puts "Choose:"
         puts "'ex' to read an excerpt from the original article,"
         puts "'www' to navigate to the original article in your browser,"
-        puts "'again' to read the article summary again, or"
-        puts "'other' to return to look at other articles."
+        puts "'again' to see the article summary again, or"
+        puts "'other' to look at other articles."
         input = gets.chomp.downcase
         breakline_space_only
         case input
