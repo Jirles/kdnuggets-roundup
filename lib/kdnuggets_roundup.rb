@@ -13,12 +13,12 @@ module KdnuggetsRoundup
 
     def breakline_title
       puts ". . ."
-      puts ""
+      breakline_space_only
     end
 
     def breakline_end
       puts "* * * * * * * * *"
-      puts ""
+      breakline_space_only
     end
 
     def call
@@ -26,19 +26,19 @@ module KdnuggetsRoundup
       puts "Howdy, stranger!"
       breakline_title
       puts "The Kdnuggets Roundup is your source for the top articles in data science as curated by KDnuggets.com."
+      puts "Let's see what we can wrassle up for ya..."
       breakline_end
       KdnuggetsRoundup::DataWrassler.new.wrassle_top_stories
-      menu
+      main_menu
     end
 
-    def menu
+    def main_menu
       input = nil
       while input != 'quit'
         puts "What can I lasso up for ya?"
         breakline_space_only
         puts "Choose:"
         puts "'list' to list all of the top articles for this past week,"
-        puts "'filter' to filter articles by most popular or most shared,"
         puts "'article' to look more closely at a particular article, or"
         puts "'quit' to exit the program."
         puts ' \\\__________'
@@ -70,27 +70,23 @@ module KdnuggetsRoundup
     #submenus methods
 
     def filter_submenu
-      input = nil
-      while input != 'menu'
-        breakline_title
-        puts "Enter 'popular' to see the most popular, 'shared' to see the most shared, or 'menu' to return to the main menu."
-        input = gets.chomp.downcase
-        if input == "popular"
-          breakline_space_only
-          KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.popular)
-          breakline_space_only
-        elsif input == "shared"
-          breakline_space_only
-          KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.shared)
-          breakline_space_only
-        elsif input == 'menu'
-          breakline_end
-          break
-        else
-          breakline_space_only
-          puts "Sorry, partner. Didn't catch that."
-          breakline_space_only
-        end
+      breakline_title
+      puts "Pick your poison, friend: Most Popular or Most Shared?"
+      puts "Enter 'popular' to see the most popular or 'shared' to see the most shared"
+      input = gets.chomp.downcase
+      case input
+      when "popular"
+        breakline_space_only
+        KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.popular)
+        breakline_space_only
+      when "shared"
+        breakline_space_only
+        KdnuggetsRoundup::Article.list(KdnuggetsRoundup::Article.shared)
+        breakline_space_only
+      else
+        breakline_space_only
+        puts "Sorry, partner. Didn't catch that."
+        breakline_space_only
       end
     end
 
@@ -112,9 +108,13 @@ module KdnuggetsRoundup
       while input != 'menu'
         breakline_title
         puts "Choose an article number and I'll show ya more."
-        puts "You can also type 'list' to see the articles listed again or 'menu' to return to the main menu."
+        puts "You can also choose:"
+        puts "'list' to see all the articles listed again,"
+        puts "'filter' to filter articles by most popular or most shared, or"
+        puts "'menu' to return to the main menu."
         input = gets.chomp.downcase
-        if avail_choices.include?(input) #=> to be fixed so it knows if a number in the correct range was chosen
+        case input
+        when avail_choices.include?(input) #=> to be fixed so it knows if a number in the correct range was chosen
           breakline_space_only
           puts "Here's that article you asked for:"
           breakline_space_only
@@ -122,10 +122,12 @@ module KdnuggetsRoundup
           chosen_article.display_article #=> input converted to index
           article_view_submenu(chosen_article, articles)
           breakline_space_only
-        elsif input == "list"
+        when "list"
           breakline_space_only
           KdnuggetsRoundup::Article.list(articles)
-        elsif input == 'menu'
+        when "filter"
+          filter_submenu
+        when "menu"
           breakline_end
           break
         else
