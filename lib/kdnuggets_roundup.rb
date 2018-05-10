@@ -60,14 +60,7 @@ module KdnuggetsRoundup
         end
       end
       puts "Time to be hittin' th' ol' dusty trail..."
-      puts "                 _______  _____ "
-      puts '                /       \/     \\'
-      puts '               /                \\'
-      puts '              /                  \\'
-      puts '             /                    \\'
-      puts '/           /---|-------|------|---\\            \\'
-      puts '\_________ /-------|--------|-------\\___________/'
-      puts ' \_____________________________________________/'
+      puts "* * * * * * * * * * * * *"
       puts breakline_space_only
     end
 
