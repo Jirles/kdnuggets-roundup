@@ -90,6 +90,7 @@ module KdnuggetsRoundup
         KdnuggetsRoundup::Article.list(articles)
         breakline_space_only
         puts "Pick your poison, friend. Enter an article number and I'll show ya more."
+        breakline_space_only
         puts "You can also choose:"
         puts "'rank' to see the articles ranked by most popular and most shared, or "
         puts "'menu' to return to the main menu."
