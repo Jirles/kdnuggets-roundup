@@ -88,6 +88,7 @@ module KdnuggetsRoundup
       while input != 'menu'
         breakline_title
         KdnuggetsRoundup::Article.list(articles)
+        breakline_space_only
         puts "Pick your poison, friend. Enter an article number and I'll show ya more."
         puts "You can also choose:"
         puts "'rank' to see the articles ranked by most popular and most shared, or "
@@ -134,7 +135,6 @@ module KdnuggetsRoundup
         puts "Choose:"
         puts "'ex' to read an excerpt from the original article,"
         puts "'www' to navigate to the original article in your browser,"
-        puts "'again' to see the article summary again, or"
         puts "'other' to look at other articles."
         input = gets.chomp.downcase
         breakline_space_only
@@ -144,11 +144,7 @@ module KdnuggetsRoundup
         when 'www'
           puts "Hold on to yer britches, we're headed to the World Wide Web!"
           system("open " + chosen_article.url)
-        when 'again'
-          chosen_article.display_article
         when 'other'
-          breakline_space_only
-          KdnuggetsRoundup::Article.list(articles) #=> list articles before breaking out of this loop, as article_submenu does not automatically list once in the loop
           break #=> breaks out to article_submenu
         else
           puts "Sorry, partner. Didn't catch that."
