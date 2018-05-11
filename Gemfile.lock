@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     kdnuggets_roundup (0.1.0)
+      nokogiri (~> 1.8, >= 1.8.2)
 
 GEM
   remote: https://rubygems.org/
@@ -36,7 +37,6 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.16)
   kdnuggets_roundup!
-  nokogiri (~> 1.8, >= 1.8.2)
   pry (~> 0.11.3)
   rake (~> 10.0)
   rspec (~> 3.0)
