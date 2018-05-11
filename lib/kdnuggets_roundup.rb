@@ -63,19 +63,10 @@ module KdnuggetsRoundup
       puts breakline_space_only
     end
 
-    #helper method for article_submenu
-    def calc_available_choices(articles)
-      Array.new.tap do |avail_choices|
-        (1..articles.count).each do |num|
-          avail_choices << num.to_s
-        end
-      end
-    end
-
     #submenu methods
     def article_selection_menu(articles)
       breakline_space_only
-      avail_choices = calc_available_choices(articles)
+      avail_choices = (1..articles.count).collect{ |num| num.to_s}
       input = nil
       while input != 'menu'
         breakline_title
