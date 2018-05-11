@@ -62,7 +62,7 @@ class KdnuggetsRoundup::Article
     list(popular)
     puts ""
     puts "Most Shared"
-    list( shared)
+    list(shared)
     puts ""
   end
 
