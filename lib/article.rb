@@ -1,13 +1,13 @@
 class KdnuggetsRoundup::Article
 
-  attr_accessor :title, :author, :tags, :url, :summary, :excerpt
+  attr_accessor :title, :author, :tags, :url, :summary, :excerpt, :popular, :shared
   @@all = []
-  @@popular = [] #=> contains most popular articles for easy filtering
-  @@shared = [] #=> contains most shared articles for same reason
 
   def initialize(title, url)
     @title = title
     @url = url
+    @popular = false
+    @shared = false
     @@all << self
   end
 
@@ -19,25 +19,20 @@ class KdnuggetsRoundup::Article
     all.detect{|story| story.title == title}
   end
 
-  # REFACTOR OPPORTUNITY
   def add_to_popular
-    @@popular << self
+    @popular = true
   end
 
   def add_to_shared
-    @@shared << self
+    @shared = true
   end
 
   def self.popular
     all.select{|a| a.popular}
   end
 
-  def self.popular
-    @@popular
-  end
-
   def self.shared
-    @@shared
+    all.select{|a| a.shared}
   end
 
   def self.all
