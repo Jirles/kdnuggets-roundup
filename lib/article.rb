@@ -19,12 +19,17 @@ class KdnuggetsRoundup::Article
     all.detect{|story| story.title == title}
   end
 
+  # REFACTOR OPPORTUNITY
   def add_to_popular
     @@popular << self
   end
 
   def add_to_shared
     @@shared << self
+  end
+
+  def self.popular
+    all.select{|a| a.popular}
   end
 
   def self.popular
@@ -37,39 +42,6 @@ class KdnuggetsRoundup::Article
 
   def self.all
     @@all
-  end
-
-  def self.list(collection)
-    collection.each_with_index do |article, i|
-      puts "#{i + 1}. #{article.title}"
-    end
-  end
-
-  def display_article
-    puts <<-DOC
-    #{title}
-    By: #{author}
-    Tags: #{tags.dup.join(', ')}
-
-    Summary
-    -------
-    #{summary}
-    DOC
-  end
-
-  def self.display_rankings
-    puts "Most Popular"
-    list(popular)
-    puts ""
-    puts "Most Shared"
-    list(shared)
-    puts ""
-  end
-
-  def read_excerpt
-    excerpt.each do |paragraph|
-      puts paragraph
-    end
   end
 
 end

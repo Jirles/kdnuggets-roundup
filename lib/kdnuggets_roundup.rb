@@ -22,6 +22,41 @@ module KdnuggetsRoundup
       puts "/__/"
     end
 
+    #article / collection display methods
+
+    def list(collection)
+      collection.each_with_index do |article, i|
+        puts "#{i + 1}. #{article.title}"
+      end
+    end
+
+    def display_article(article)
+      puts <<-DOC
+      #{article.title}
+      By: #{article.author}
+      Tags: #{article.tags.dup.join(', ')}
+
+      Summary
+      -------
+      #{article.summary}
+      DOC
+    end
+
+    def display_rankings
+      puts "Most Popular"
+      list(KdnuggetsRoundup::Article.popular)
+      puts ""
+      puts "Most Shared"
+      list(KdnuggetsRoundup::Article.shared)
+      puts ""
+    end
+
+    def read_excerpt(article)
+      article.excerpt.each do |paragraph|
+        puts paragraph
+      end
+    end
+
     def call
       breakline_space_only
       puts "Howdy, stranger!"
@@ -34,7 +69,6 @@ module KdnuggetsRoundup
 
     def main_menu
       input = nil
-      articles = KdnuggetsRoundup::Article.all
       while input != 'quit'
         breakline_title
         puts "Pick yer poison, friend."
@@ -48,9 +82,9 @@ module KdnuggetsRoundup
         breakline_space_only
         case input
         when "rank"
-          KdnuggetsRoundup::Article.display_rankings
+          display_rankings
         when "article"
-          article_selection_menu(articles)
+          article_selection_menu
         when 'quit'
           break
         else
@@ -63,13 +97,13 @@ module KdnuggetsRoundup
     end
 
     #submenu methods
-    def article_selection_menu(articles)
+    def article_selection_menu
       breakline_space_only
-      avail_choices = (1..articles.count).collect{ |num| num.to_s}
+      avail_choices = (1..KdnuggetsRoundup::Article.all.count).collect{ |num| num.to_s }
       input = nil
       while input != 'menu'
         breakline_title
-        KdnuggetsRoundup::Article.list(articles)
+        list(KdnuggetsRoundup::Article.all)
         breakline_space_only
         puts "Enter an article number and I'll lasso it up for ya."
         breakline_space_only
@@ -82,9 +116,9 @@ module KdnuggetsRoundup
         if avail_choices.include?(input)
           puts "Here's that article you asked for:"
           breakline_space_only
-          chosen_article = articles[input.to_i - 1]
-          chosen_article.display_article
-          article_selection_submenu(chosen_article, articles)
+          chosen_article = KdnuggetsRoundup::Article.all[input.to_i - 1]
+          display_article(chosen_article)
+          article_selection_submenu(chosen_article)
         elsif input == "rank"
           rank_submenu
         elsif input == "menu"
@@ -99,14 +133,14 @@ module KdnuggetsRoundup
       input = nil
       until input == 'menu'
         breakline_title
-        KdnuggetsRoundup::Article.display_rankings
+        display_rankings
         puts "When you're ready to return to the article menu, type 'menu'."
         gun_graphic
         input = gets.chomp.downcase
       end
     end
 
-    def article_selection_submenu(chosen_article, articles)
+    def article_selection_submenu(chosen_article)
       input = nil
       while input != 'other'
         breakline_title
@@ -121,7 +155,7 @@ module KdnuggetsRoundup
         breakline_space_only
         case input
         when 'ex'
-          chosen_article.read_excerpt
+          read_excerpt(chosen_article)
         when 'www'
           puts "Hold on to yer britches, we're headed to the World Wide Web!"
           system("open " + chosen_article.url)
@@ -132,7 +166,6 @@ module KdnuggetsRoundup
         end
       end
     end
-
 
   end
 
